@@ -1,0 +1,231 @@
+*, ::before, ::after {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+
+:root {
+   --main: #3420FF;
+}
+
+html {
+   font-size: 10px;
+   height: 100vh;
+   overflow-y: auto;
+   scroll-snap-type: y mandatory;
+   scroll-behavior: smooth;
+}
+
+body {
+   font-size: 1.8rem;
+   font-family: 'Public Sans', sans-serif;
+   font-weight: 400;
+}
+
+nav {
+   font-size: 1.6rem;
+   font-weight: 500;
+}
+
+h1 {
+   font-size: 4rem;
+   font-weight: 700;
+   margin-bottom: .6rem;
+}
+
+h2 {
+   font-size: 3rem;
+   font-weight: 600;
+   margin-bottom: 1.8rem;
+}
+
+p, ul.list {
+   padding: .8rem 0;
+}
+
+a {
+   display: inline-block;
+   color: inherit;
+   text-decoration: none;
+   transition: color .2s;
+}
+
+a:hover, .colored {
+   color: var(--main);
+}
+
+ul {
+   list-style: none;
+}
+
+ul.list {
+   list-style: disc inside;
+}
+
+p + ul.list {
+   padding-top: 0;
+}
+
+#toggle-menu {
+   display: none;
+}
+
+#toggle-menu + label {
+   position: fixed;
+   top: 2rem;
+   right: 3rem;
+   height: 3rem;
+   width: 3rem;
+   z-index: 9;
+   cursor: pointer;
+   display: none;
+}
+
+#toggle-menu + label span, #toggle-menu + label span::before, #toggle-menu + label span::after {
+   display: inline-block;
+   position: absolute;
+   height: .3rem;
+   width: 100%;
+   background: black;
+}
+
+#toggle-menu + label span {
+   top: 1.35rem;
+   transition: background-color 0s .1s;
+}
+
+#toggle-menu + label span::before {
+   content: "";
+   bottom: .9rem;
+   transition: bottom .1s .1s, transform .1s;
+}
+
+#toggle-menu + label span::after {
+   content: "";
+   top: .9rem;
+   transition: top .1s .1s, transform .1s;
+}
+
+#toggle-menu:checked + label span {
+   background-color: rgba(0, 0, 0, 0);
+}
+
+#toggle-menu:checked + label span::before {
+   bottom: 0;
+   transform: rotate(45deg);
+   transition: bottom .1s, transform .1s .1s;
+}
+
+#toggle-menu:checked + label span::after {
+   top: 0;
+   transform: rotate(-45deg);
+   transition: top .1s, transform .1s .1s;
+}
+
+.section, nav {
+   padding: 0 calc(50vw - 60rem);
+}
+
+nav {
+   position: fixed;
+   top: 0;
+   left: 0;
+   right: 0;
+   padding-top: 2rem;
+   padding-bottom: 2rem;
+   background: rgba(0, 0, 0, .025);
+   -webkit-backdrop-filter: blur(3px);
+   backdrop-filter: blur(3px);
+   z-index: 8;
+}
+
+nav ul {
+   display: flex;
+   justify-content: flex-end;
+}
+
+nav ul a {
+   padding: 1rem 2rem;
+}
+
+.section {
+   min-height: 100vh;
+   scroll-snap-align: start;
+   padding-top: 8rem;
+   padding-bottom: 8rem;
+   display: flex;
+   align-items: center;
+}
+
+.section > * {
+   flex-grow: 1;
+   flex-basis: 0;
+   margin: 2rem 3rem;
+}
+
+.section img {
+   min-width: 0;
+   max-width: 70%;
+   object-fit: contain;
+   object-position: left;
+   max-height: 30rem;
+   max-height: min(30rem, 40vh);
+}
+
+.section div + img {
+   object-position: right;
+}
+
+@media screen and (max-width: 768px) {
+   html {
+      font-size: 9px;
+      scroll-snap-type: none;
+   }
+
+   #toggle-menu + label {
+      display: block;
+   }
+   
+   #toggle-menu:checked + label + nav {
+      transform: translateX(0);
+   }
+
+   nav {
+      left: auto;
+      bottom: 0;
+      padding: 5rem 2rem 2rem;
+      transform: translateX(100%);
+      transition: transform .1s;
+   }
+
+   nav ul {
+      flex-direction: column;
+      align-items: flex-end;
+   }
+
+   .section {
+      flex-direction: column;
+      justify-content: center;
+      min-height: 0;
+      padding-top: 5rem;
+      padding-bottom: 5rem;
+   }
+
+   .section > * {
+      flex-grow: 0;
+   }
+
+   .section img {
+      order: -1;
+   }
+
+   header.section, footer.section {
+      min-height: 100vh;
+   }
+}
+
+@media screen and (max-width: 425px) {
+   html {
+      font-size: 8px;
+   }
+}
